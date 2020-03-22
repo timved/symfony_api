@@ -1,0 +1,3 @@
+test:
+  type: rest
+  resource: App\RestController\TestController
