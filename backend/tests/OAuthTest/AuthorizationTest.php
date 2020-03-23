@@ -52,13 +52,11 @@ class AuthorizationTest extends WebTestCase
             'HTTP_AUTHORIZATION' => $content['access_token'],
         ]);
         $response = $this->client->getResponse();
-        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
+//        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
         $content = \json_decode($response->getContent(), true);
-//        $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
-//        $this->assertEquals('Test Access Denied.', $content['message']);
-//        $this->assertEquals(Response::HTTP_FORBIDDEN, $content['code']);
-
-        return;
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
+        $this->assertEquals('Test Access Denied.', $content['message']);
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $content['code']);
 
     }
 }

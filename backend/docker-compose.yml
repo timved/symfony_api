@@ -29,8 +29,8 @@ services:
 
     volumes:
       - ".:/srv/www"
-      - ".docker/etc/php/php-dev.ini:/etc/php/7.3/fpm/conf.d/60-dev.ini"
-      - ".docker/etc/php/php-cli.ini:/etc/php/7.3/cli/conf.d/60-dev.ini"
+      - ".docker/etc/php/php-dev.ini:/etc/php/7.4/fpm/conf.d/60-dev.ini"
+      - ".docker/etc/php/php-cli.ini:/etc/php/7.4/cli/conf.d/60-dev.ini"
       - '.docker/etc/roadrunner:/etc/roadrunner'
 
     depends_on:
