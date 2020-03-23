@@ -23,7 +23,7 @@ RUN apt-get -qqy install build-essential libssl1.0-dev git curl wget libfontconf
 RUN apt-add-repository ppa:ondrej/php
 
 # install requirements (php)
-RUN apt-get install -qqy memcached php7.3 php7.3-dom php7.3-fpm php7.3-bcmath php7.3-memcached php7.3-xml php7.3-mbstring php7.3-gd php7.3-pdo php7.3-mysql php7.3-pgsql php7.3-imagick php7.3-common php7.3-zip php7.3-curl libsqlite3-dev mysql-client openssh-server php7.3-cli php7.3-sqlite php7.3-sqlite3
+RUN apt-get install -qqy memcached php7.4 php7.4-dom php7.4-fpm php7.4-bcmath php7.4-memcached php7.4-xml php7.4-mbstring php7.4-gd php7.4-pdo php7.4-mysql php7.4-pgsql php7.4-imagick php7.4-common php7.4-zip php7.4-curl libsqlite3-dev mysql-client openssh-server php7.4-cli php7.4-sqlite php7.4-sqlite3
 
 RUN apt-get update -qq \
     && apt-get -y clean > /dev/null \
@@ -39,7 +39,7 @@ RUN rm -rf /srv/www/* && mkdir /srv/www \
     && apt-get -y clean > /dev/null \
     && rm -rf /var/www/* && rm -rf /var/lib/apt/lists/* \
     # Start service once so that it properly initializes
-    && service php7.3-fpm start && service php7.3-fpm stop
+    && service php7.4-fpm start && service php7.4-fpm stop
 
 # END BASE --------------------------------------------------------
 
@@ -56,9 +56,9 @@ COPY . /srv/www
 COPY .docker/etc/cron.d/base /etc/cron.d/
 
 # php configure
-COPY .docker/etc/php/php.ini /etc/php/7.3/fpm/conf.d/50-dev.ini
-COPY .docker/etc/php/php-cli.ini /etc/php/7.3/cli/conf.d/60-dev.ini
-COPY .docker/etc/php/php-fpm-pool.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY .docker/etc/php/php.ini /etc/php/7.4/fpm/conf.d/50-dev.ini
+COPY .docker/etc/php/php-cli.ini /etc/php/7.4/cli/conf.d/60-dev.ini
+COPY .docker/etc/php/php-fpm-pool.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN cd /srv/www \
     && composer install -q \
@@ -74,7 +74,7 @@ RUN chmod +x /srv/www/bin/* \
     && chmod 644 /etc/cron.d/*
 
 RUN apt-get update \
-    && apt-get install -qqy php7.3-xdebug
+    && apt-get install -qqy php7.4-xdebug
 
 # Download RoadRunner `spiral/roadrunner` && `symfony/psr-http-message-bridge`
 ENV RR_VERSION 1.4.7
